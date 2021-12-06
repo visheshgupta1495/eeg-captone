@@ -1,0 +1,63 @@
+{% comment %} {% extends 'base.html' %} {% block content %}
+<ul>
+  <li>
+    <a href="{% url 'convertGrayScale' %}">Simple Upload</a>
+  </li>
+  <li>
+    <a href="{% url 'CompressVideo' %}">Model Form Upload</a>
+  </li>
+</ul>
+{% comment %}
+<p>Uploaded files:</p>
+<ul>
+  {% for obj in documents %}
+  <li>
+    <a href="{{ obj.document.url }}">{{ obj.document.name }}</a>
+    <small>(Uploaded at: {{ obj.uploaded_at }})</small>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %} {% endcomment %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Convert Video</title>
+    <link rel="stylesheet" type="text/css" href="media/view.css" media="all" />
+    <script type="text/javascript" src="media/view.js"></script>
+  </head>
+  <body id="main_body">
+    <img id="top" src="media/top.png" alt="" />
+    <div id="form_container">
+      <form class="appnitro" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        <div class="form_description">
+          <h2>Video Modifier</h2>
+        </div>
+        <li id="li_1">
+          <label class="description" for="element_1"
+            ><a href="{% url 'convertGrayScale' %}"
+              >Convert to Gray Scale</a
+            ></label
+          >
+          <p></p>
+        </li>
+        <p></p>
+        <li id="li_1">
+          <label class="description" for="element_1">
+            <a href="{% url 'CompressVideo' %}">Compress Video Size</a></label
+          >
+          <p></p>
+        </li>
+        <p></p>
+        <p></p>
+        <p></p>
+        <li>
+          <p>Made By : Prakhar Jindal</p>
+        </li>
+      </form>
+    </div>
+    <img id="bottom" src="media/bottom.png" alt="" />
+  </body>
+</html>
