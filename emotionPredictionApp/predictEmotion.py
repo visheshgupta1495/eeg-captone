@@ -1,3 +1,4 @@
+import os
 from sklearn.preprocessing import RobustScaler
 import numpy as np
 import pandas as pd
@@ -9,6 +10,10 @@ import pandas as pd
 from keras.models import Model
 import warnings
 warnings.filterwarnings('ignore')
+
+# Get the current working directory
+# cwd = os.path.dirname(os.getcwd())
+cwd = os.getcwd()
 
 channel = [1, 2, 3, 4, 7, 11, 13, 17, 19, 20, 21, 25, 29, 31]
 band = [32, 33, 34, 36, 38, 39, 40, 42, 44, 46, 48, 50]
@@ -102,7 +107,8 @@ def emotionPred(file):
                   2: 'Its a fresh Cotton leaf',
                   3: 'Its a fresh Cotton plant'}
 
-    df = pd.read_csv("D:/django projects/emotionPredictionProject" + file)
+    print(cwd)
+    df = pd.read_csv(cwd + file)
 
     df = df[[
         "EEG.AF3",
@@ -139,13 +145,13 @@ def emotionPred(file):
     x_test = x_test.reshape(x_test.shape[0], x_test.shape[1], 1)
 
     model_ar = load_model(
-        "D:/django projects/emotionPredictionProject/media/Emotive fft_fir_cnn_80_20_model_arousal valacc 0.8749.h5")
+        cwd+"/media/Emotive fft_fir_cnn_80_20_model_arousal valacc 0.8749.h5")
     model_val = load_model(
-        "D:/django projects/emotionPredictionProject/media/Emotive fft_fir_cnn_80_20_model_valence valacc 0.8696.h5")
+        cwd+"/media/Emotive fft_fir_cnn_80_20_model_valence valacc 0.8696.h5")
     model_dom = load_model(
-        "D:/django projects/emotionPredictionProject/media/Emotive fft_fir_cnn_80_20_model_domain valacc 0.8787.h5")
+        cwd+"/media/Emotive fft_fir_cnn_80_20_model_domain valacc 0.8787.h5")
     model_lik = load_model(
-        "D:/django projects/emotionPredictionProject/media/Emotive fft_fir_cnn_80_20_model_liking valacc 0.8695.h5")
+        cwd+"/media/Emotive fft_fir_cnn_80_20_model_liking valacc 0.8695.h5")
 
     y_pred_ar = model_ar.predict(x_test)
     y_pred_val = model_val.predict(x_test)
@@ -172,5 +178,8 @@ def emotionPred(file):
                                                        ar_average) + np.abs(5.6-dom_average))
     output_lst.append(np.abs(2.8-val_average) + np.abs(4.4 -
                                                        ar_average) + np.abs(5.6-dom_average))
-    pred_class = output[np.argmax(output_lst)]
+    pred_class = output[np.argmin(output_lst)]
+
+    print(output_lst, pred_class)
+
     return (pred_class)
