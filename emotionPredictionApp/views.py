@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
 
-from .predictEmotion import emotionPred
+# from .predictEmotion import emotionPred
 import os
 
 cwd = os.getcwd()
@@ -31,7 +31,8 @@ def home(request):
             print("Filename: ", filename)
             uploaded_file_url = fs.url(filename)
             print("Uploaded file URL: ", uploaded_file_url)
-            output_pred = emotionPred(uploaded_file_url)
+            # output_pred = emotionPred(uploaded_file_url)
+            output_pred = "Text"
             os.remove(cwd + uploaded_file_url)
             # attach_file_name = output_file
             # Open the file as binary mode
