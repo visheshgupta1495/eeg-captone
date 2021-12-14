@@ -1,6 +1,6 @@
 body
 {
-	background:#fffff;
+	background:#ffffff;
 	font-family:"Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
 	font-size:small;
 	margin:8px 0 16px;
@@ -863,3 +863,26 @@ background: #dedede;
 font-weight: bold;
 }
 
+
+
+.myButton {
+	box-shadow: 0px 10px 14px -7px #9fb4f2;
+	background-color:#7892c2;
+	border-radius:11px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+	padding:11px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #283966;
+}
+.myButton:hover {
+	background-color:#476e9e;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+} 
